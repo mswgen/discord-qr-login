@@ -1,0 +1,38 @@
+{
+  "name": "discord-qr-login",
+  "version": "1.0.0",
+  "description": "Discord QR code login example",
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "node dist/index.js",
+    "build": "run-script-os",
+    "build:win32": "rd /s /q dist && tsc",
+    "build:darwin:linux:android": "rm -rf dist && tsc",
+    "client": "node dist/client.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mswgen/discord-qr-login.git"
+  },
+  "keywords": [
+    "discord",
+    "qr",
+    "login"
+  ],
+  "author": "mswgen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mswgen/discord-qr-login/issues"
+  },
+  "homepage": "https://github.com/mswgen/discord-qr-login#readme",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "ws": "^8.2.1"
+  },
+  "devDependencies": {
+    "@types/node": "^16.7.8",
+    "@types/ws": "^7.4.7",
+    "run-script-os": "^1.1.6",
+    "typescript": "^4.4.2"
+  }
+}
