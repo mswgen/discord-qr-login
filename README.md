@@ -10,4 +10,10 @@
 
 4. TypeScript 컴파일(`yarn build`)
 
+Windows의 경우 여기서 에러가 나면 `md dist`를 먼저 실행해주세요.
+
 5. 실행(`yarn start`)
+
+## 분석 결과
+
+[why-does-it-work.md](./why-does-it-work.md) 참고.
