@@ -1,5 +1,6 @@
 import ws from 'ws';
 import crypto from 'crypto';
+import qrcode from 'qrcode';
 console.log('Generating key pair...');
 const key = crypto.generateKeyPairSync('rsa', {
     modulusLength: 2048
@@ -49,9 +50,11 @@ connection.on('message', message => {
             break;
         case 'pending_remote_init':
             console.log('QR code url arrived!');
-            const qrcode = `https://discord.com/ra/${data.fingerprint}`;
+            const qrcodeUrl = `https://discord.com/ra/${data.fingerprint}`;
             console.log(`Run 'npm run client' or 'yarn client' and type this QR code url:`);
-            console.log(qrcode);
+            console.log(qrcodeUrl);
+            console.log('You may also use this QR code with mobile app:');
+            qrcode.toString(qrcodeUrl).then(console.log);
             break;
         case 'pending_finish':
             const userData = crypto.privateDecrypt({
