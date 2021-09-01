@@ -1,6 +1,6 @@
 # Discord QR 로그인 분석
 
-1. 컴퓨터가 웹소켓 게이트웨이 `wss://remote-auth-gateway.discord.gg/?v=1`
+1. 컴퓨터가 웹소켓 게이트웨이 `wss://remote-auth-gateway.discord.gg/?v=1`에 연결.
 
 이때 헤더의 User-Agent 값 검증 (여기서는 윈도우용 크롬 94로 스푸핑함)
 
