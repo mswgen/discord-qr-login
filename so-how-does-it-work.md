@@ -17,6 +17,7 @@
 2. 서버가 opcode hello를 보냄
 
 | 키 | 타입 | 설명 |
+| --- | --- | --- |
 | heartbeat_interval | Number | 밀리초 단위, 이 시간마다 heartbeat을 보내야함 |
 | timeout_ms | Number | 밀리초 단위, 이 시간이 지나면 세션이 만료됨 |
 
@@ -27,11 +28,13 @@
 5. 컴퓨터가 opcode init을 보냄
 
 | 키 | 타입 | 설명 |
+| --- | --- | --- |
 | encoded_public_key | string | 4번에서 만든 공개 키를 spki 형식, der 포맷으로 인코딩 후 base64 인코딩한 값(문자열 끝에 =이 없음) |
 
 6. 서버가 opcode nonce_proof를 보냄
 
-| 키 | 타입 | 설명
+| 키 | 타입 | 설명 |
+| --- | --- | --- |
 | encrypted_nonce | string | 임의의 값(nonce)를 5번에서 보낸 공개키로 암호화한 값을 base64로 인코딩한 값 |
 
 7. 컴퓨터는 5번에서 받은 encrypted_nonce를 base64 디코딩 후 4번의 비밀키로 복호화함. 이때 oaep 해시는 SHA-256을 사용함.
@@ -39,11 +42,13 @@
 8. 컴퓨터가 opcode nonce_proof를 보냄.
 
 | 키 | 타입 | 설명 |
+| --- | --- | --- |
 | proof | string | nonce값의 SHA-256 해시를 base64 인코딩한 값에서 /를 모두 \_로 변경, +를 모두 -로 변경, 앞에서부터 2개의 =을 지운 값 |
 
 9. 서버가 opcode pending_remote_init을 보냄.
 
 | 키 | 타입 | 설명 |
+| --- | --- | --- |
 | fingerprint | string | qr코드 url을 만들기 위한 값 |
 
 10. 컴퓨터는 `https://discord.com/ra/` 뒤에 9번에서 얻은 fingerprint 값을 붙인 값에 대한 QR코드를 표시함.
@@ -57,17 +62,20 @@
 JSON 인코드된 데이터(body)
 
 | 키 | 타입 | 설명 |
+| --- | --- | --- |
 | fingerprint | string | 12번에서 추출한 값 |
 
 요청 헤더
 
 | 키 | 타입 | 설명 |
+| --- | --- | --- |
 | Content-Type | string | 항상 `application/json` |
 | Authorization | string | 유저의 Discord 토큰(`Bearer`를 포함하지 않음) |
 
 14-1. 서버는 컴퓨터에 opcode pending_finish를 보냄.
 
 | 키 | 타입 | 설명 |
+| --- | --- | --- |
 | encrypted_user_payload | string | QR코드를 찍은 유저 정보를 5번에서 보낸 공개키로 암호화 후 base64 인코딩한 값 |
 
 15-1. 컴퓨터는 14-1번의 encrypted_user_payload를 base64 디코딩한 후 4번의 비밀키로 복호화함. oaep 해시는 SHA-256임.
@@ -83,12 +91,14 @@ JSON 인코드된 데이터(body)
 JSON 인코드된 데이터(body)
 
 | 키 | 타입 | 설명 |
+| --- | --- | --- |
 | handshake_token | string | 14-2의 handshake_token 값 |
 | temporary_token | boolean | 항상 false |
 
 요청 헤더
 
 | 키 | 타입 | 설명 |
+| --- | --- | --- |
 | Content-Type | string | 항상 `application/json` |
 | Authorization | string | 유저의 Discord 토큰(`Bearer`를 포함하지 않음) |
 
@@ -97,17 +107,20 @@ JSON 인코드된 데이터(body)
 JSON 인코드된 데이터(body)
 
 | 키 | 타입 | 설명 |
+| --- | --- | --- |
 | handshake_token | string | 14-2의 handshake_token 값 |
 
 요청 헤더
 
 | 키 | 타입 | 설명 |
+| --- | --- | --- |
 | Content-Type | string | 항상 `application/json` |
 | Authorization | string | 유저의 Discord 토큰(`Bearer`를 포함하지 않음) |
 
 17-1. 폰에서 Yes를 누르면 서버는 컴퓨터에 opcode finish를 보냄.
 
 | 키 | 타입 | 설명 |
+| --- | --- | --- |
 | encrypted_token | string | 유저의 Discord 토큰을 5번에서 보낸 공개키로 암호화 후 base64 인코딩한 값 |
 
 17-2. 폰에서 No를 눌렀으면 서버는 컴퓨터에 opcode cancel을 보냄. 별도의 데이터는 없음.
